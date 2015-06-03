@@ -46,6 +46,8 @@
 @synthesize dataDetectorTypes; 
 @synthesize animateHeightChange;
 @synthesize returnKeyType;
+@dynamic placeholder;
+@dynamic placeholderColor;
 
 // having initwithcoder allows us to use HPGrowingTextView in a Nib. -- aob, 9/2011
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -97,8 +99,35 @@
     
     internalTextView.text = @"";
 //    [self setMaxNumberOfLines:3];
+    
+    [self setPlaceholderColor:[UIColor lightGrayColor]];
+    internalTextView.displayPlaceHolder = YES;
+
+    
     maxNumberOfLines = 3;
 }
+
+- (NSString *)placeholder
+{
+    return internalTextView.placeholder;
+}
+
+- (void)setPlaceholder:(NSString *)placeholder
+{
+    [internalTextView setPlaceholder:placeholder];
+    [internalTextView setNeedsDisplay];
+}
+
+- (UIColor *)placeholderColor
+{
+    return internalTextView.placeholderColor;
+}
+
+- (void)setPlaceholderColor:(UIColor *)placeholderColor
+{
+    [internalTextView setPlaceholderColor:placeholderColor];
+}
+
 
 -(CGSize)sizeThatFits:(CGSize)size
 {
@@ -323,6 +352,16 @@
         }
 	}
 	
+    
+    // Display (or not) the placeholder string
+    
+    BOOL wasDisplayingPlaceholder = internalTextView.displayPlaceHolder;
+    internalTextView.displayPlaceHolder = self.internalTextView.text.length == 0;
+    
+    if (wasDisplayingPlaceholder != internalTextView.displayPlaceHolder) {
+        [internalTextView setNeedsDisplay];
+    }
+
 	
 	if ([delegate respondsToSelector:@selector(growingTextViewDidChange:)]) {
 		[delegate growingTextViewDidChange:self];
@@ -528,7 +567,7 @@
 - (void)scrollRangeToVisible:(NSRange)range
 {
 	[internalTextView scrollRangeToVisible:range];
-    NSLog(@"range= %d, textview.contentSize.height = %f, textview.contentSize.width = %f, frame.size.height = %f, parent.frame.size.height = %f, contentOffset.y = %f", range.location, internalTextView.contentSize.height, internalTextView.contentSize.width, internalTextView.frame.size.height, self.frame.size.height, internalTextView.contentOffset.y);
+//    NSLog(@"range= %d, textview.contentSize.height = %f, textview.contentSize.width = %f, frame.size.height = %f, parent.frame.size.height = %f, contentOffset.y = %f", range.location, internalTextView.contentSize.height, internalTextView.contentSize.width, internalTextView.frame.size.height, self.frame.size.height, internalTextView.contentOffset.y);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -80,6 +80,10 @@
 @property int maxNumberOfLines;
 @property int minNumberOfLines;
 @property BOOL animateHeightChange;
+
+@property (nonatomic, strong) NSString *placeholder;
+@property (nonatomic, strong) UIColor *placeholderColor;
+
 @property (nonatomic, strong) UITextView *internalTextView;	
 
 

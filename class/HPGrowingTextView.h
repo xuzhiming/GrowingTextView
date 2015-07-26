@@ -99,6 +99,7 @@
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (assign) UIEdgeInsets contentInset;
 @property(nonatomic) BOOL enablesReturnKeyAutomatically;
+@property(nonatomic) BOOL blockMenuAction;
 
 //uitextview methods
 //need others? use .internalTextView

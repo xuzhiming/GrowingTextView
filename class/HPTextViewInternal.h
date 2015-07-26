@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSString *placeholder;
 @property (nonatomic, strong) UIColor *placeholderColor;
 @property (nonatomic) BOOL displayPlaceHolder;
+@property (nonatomic) BOOL blockMenuAction;
 
 
 @end

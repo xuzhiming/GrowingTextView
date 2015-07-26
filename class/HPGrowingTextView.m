@@ -128,6 +128,10 @@
     [internalTextView setPlaceholderColor:placeholderColor];
 }
 
+-(void)setBlockMenuAction:(BOOL)blockMenuAction{
+    _blockMenuAction = blockMenuAction;
+    [internalTextView setBlockMenuAction:blockMenuAction];
+}
 
 -(CGSize)sizeThatFits:(CGSize)size
 {
@@ -275,6 +279,12 @@
     return minNumberOfLines;
 }
 
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (self.blockMenuAction) {
+        return NO;
+    }
+    return [super canPerformAction:action withSender:sender];
+}
 
 - (void)textViewDidChange:(UITextView *)textView
 {

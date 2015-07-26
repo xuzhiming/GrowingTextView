@@ -122,7 +122,12 @@
     [self setNeedsDisplay];
 }
 
-
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (_blockMenuAction) {
+        return NO;
+    }
+    return [super canPerformAction:action withSender:sender];
+}
 
 
 @end

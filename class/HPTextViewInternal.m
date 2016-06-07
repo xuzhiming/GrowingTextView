@@ -96,6 +96,13 @@
 //    [super setContentSize:contentSize];
 //}
 
+-(void)setDisplayPlaceHolder:(BOOL)displayPlaceHolder{
+    if (_displayPlaceHolder != displayPlaceHolder) {
+        _displayPlaceHolder = displayPlaceHolder;
+        [self setNeedsDisplay];
+    }
+    
+}
 
 - (void)drawRect:(CGRect)rect
 {
